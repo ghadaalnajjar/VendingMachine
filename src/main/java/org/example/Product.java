@@ -2,15 +2,19 @@ package org.example;
 
 public abstract class Product {
 
-    private int productId;
+    private int productNumber;
     private String productName;
     private int price;
     private double quantity;
     private int calories;
     private String description;
 
-    public Product(int productId, String productName, int price, double quantity, int calories, String description) {
-        this.productId = productId;
+    public Product(){
+
+    }
+
+    public Product(int productNumber, String productName, int price, double quantity, int calories, String description) {
+        this.productNumber = productNumber;
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
@@ -18,7 +22,9 @@ public abstract class Product {
         this.description = description;
     }
 
-    public int getProductId() { return productId; }
+    public int getProductNumber() {
+        return productNumber;
+    }
 
     public String getProductName() {
         return productName;
@@ -60,8 +66,14 @@ public abstract class Product {
         this.description = description;
     }
 
+    public abstract String examine();
+
+    public abstract void use();
+
+    public abstract Product purchase(int money);
+
     @Override
     public String toString() {
-        return "Product{" + "ProductName=" + productName + ", price=" + price + ", quantity=" + quantity + ", calories=" + calories + "}";
+        return getProductNumber() + "\t" + getProductName() + "\t" + getPrice() + "\t" + getQuantity() + "\t" + getCalories() + "\t" + getDescription();
     }
 }

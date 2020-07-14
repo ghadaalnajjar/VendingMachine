@@ -2,16 +2,32 @@ package org.example;
 
 import java.util.Arrays;
 
-public class Machine extends Product implements VendingMachine{
+public class Machine implements VendingMachine{
 
-    public Product[] products = new Product[3];
+    Product product = new Product() {
+        @Override
+        public String examine() {
+            return null;
+        }
+
+        @Override
+        public void use() {
+
+        }
+
+        @Override
+        public Product purchase(int money) {
+            return null;
+        }
+    };
+
+    public Machine(Product product){
+        this.product = product;
+    }
+
     String[] denomination = {"1kr", "2kr", "5kr", "10kr", "20kr", "50kr", "100kr", "200kr", "500kr", "1000kr"};
     int amount = 0;
     int deposit = 0;
-
-    public Machine(int productId, String productName, int price, double quantity, int calories, String description) {
-        super(productId, productName, price, quantity, calories, description);
-    }
 
     @Override
     public void addCurrency(int amount, String krona) {
@@ -19,8 +35,8 @@ public class Machine extends Product implements VendingMachine{
         for (int i = 0; i<denomination.length; i++){
             if(denomination[i].equals(amount + krona)) {
                 System.out.println("The amount is valid : " + amount + krona);
-                this.amount = amount;
-                deposit = amount;
+                this.amount += amount;
+                deposit += amount;
                 check = false;
             }
         }
@@ -31,34 +47,28 @@ public class Machine extends Product implements VendingMachine{
 
     @Override
     public Product request(int productNumber) {
-        for (int i = 0; i < products.length; i++){
-            if (products[i].getProductId() == productNumber) {
-                amount = amount - products[i].getPrice();
-                return products[i];
-            }
-        }
-        return null;
+        amount = amount - product.getPrice() ;
+        return product;
     }
 
     @Override
     public int endSession() {
-        if(amount >= 0){
-            System.out.println("The deposit : " + deposit + "\tand amount : " + amount + "\tless zero please add amount");
-            return amount;
+        int total = amount;
+        int nettotal = deposit;
+        if(total >= 0){
+            System.out.println("The deposit : " + nettotal + "\tand amount : " + total + "\tless zero please add amount");
+            amount = 0;
+            deposit = 0;
+            return total;
         }
         else
-            System.out.println("The deposit : " + deposit + "\tand amount : " + amount);
-            return amount;
+            System.out.println("The deposit : " + nettotal + "\tand amount : " + total);
+            return total;
     }
 
     @Override
     public String getDescription(int productNumber) {
-        for (int i = 0; i < products.length; i++){
-            if (products[i].getProductId() == productNumber) {
-                return products[i].getDescription();
-            }
-        }
-        return null;
+        return product.getDescription();
     }
 
     @Override
@@ -68,12 +78,7 @@ public class Machine extends Product implements VendingMachine{
 
     @Override
     public String[] getProducts() {
-        String[] p = new String[products.length];
-        for (int i = 0; i < products.length; i++){
-            p[0] = String.valueOf(products[i].getProductId());
-            p[1] = products[i].getProductName();
-        }
-        return p;
+        return null;
     }
 }
 
