@@ -9,10 +9,6 @@ public abstract class Product {
     private int calories;
     private String description;
 
-    public Product(){
-
-    }
-
     public Product(int productNumber, String productName, int price, double quantity, int calories, String description) {
         this.productNumber = productNumber;
         this.productName = productName;
