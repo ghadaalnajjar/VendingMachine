@@ -20,9 +20,4 @@ public class Foods extends Product {
     public void use() {
         System.out.println("Foods : " + super.getProductName());
     }
-
-    @Override
-    public Product purchase(int money) {
-        return null;
-    }
 }

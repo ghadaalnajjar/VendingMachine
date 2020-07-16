@@ -10,14 +10,18 @@ public class Machine implements VendingMachine{
         return Arrays.copyOf(product, product.length + 1);
     }
 
-    public Machine(Product product){
-        products = incressProductSize(products);
-        products[products.length - 1] = product;
+    public Machine(){
+
     }
 
     String[] denomination = {"1kr", "2kr", "5kr", "10kr", "20kr", "50kr", "100kr", "200kr", "500kr", "1000kr"};
     int amount = 0;
     int deposit = 0;
+
+    public void addProduct(Product product){
+        products = incressProductSize(products);
+        products[products.length - 1] = product;
+    }
 
     @Override
     public void addCurrency(int amount, String krona) {
@@ -37,6 +41,7 @@ public class Machine implements VendingMachine{
 
     @Override
     public Product request(int productNumber) {
+
         for (int i = 0; i < products.length; i ++){
             if(products[i].getProductNumber() == productNumber){
                 amount -= products[i].getPrice();
@@ -51,14 +56,15 @@ public class Machine implements VendingMachine{
         int total = amount;
         int nettotal = deposit;
         if(total >= 0){
-            System.out.println("The deposit : " + nettotal + "\tand amount : " + total + "\tless zero please add amount");
+            System.out.println("The deposit : " + nettotal + "\tand amount : " + total);
             amount = 0;
             deposit = 0;
             return total;
         }
-        else
-            System.out.println("The deposit : " + nettotal + "\tand amount : " + total);
+        else {
+            System.out.println("The deposit : " + nettotal + "\tand amount : " + total + "\tless zero please add money");
             return total;
+        }
     }
 
     @Override
@@ -80,8 +86,7 @@ public class Machine implements VendingMachine{
     public String[] getProducts() {
         String[] p = new String[products.length];
         for (int i = 0; i < products.length; i ++){
-            p[0] = String.valueOf(products[i].getProductNumber());
-            p[1] = products[i].getProductName();
+            p[i] = String.valueOf(products[i].getProductNumber()) + "\t" + products[i].getProductName();
         }
         return p;
     }

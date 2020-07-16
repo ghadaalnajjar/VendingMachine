@@ -66,7 +66,6 @@ public abstract class Product {
 
     public abstract void use();
 
-    public abstract Product purchase(int money);
 
     @Override
     public String toString() {
