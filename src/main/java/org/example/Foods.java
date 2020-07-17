@@ -2,8 +2,8 @@ package org.example;
 
 public class Foods extends Product {
 
-    public Foods(int productNumber, String productName, int price, double quantity, int calories, String description) {
-        super(productNumber, productName, price, quantity, calories, description);
+    public Foods(int productNumber, String productName, int price, int calories, String description) {
+        super(productNumber, productName, price, calories, description);
     }
 
     @Override
