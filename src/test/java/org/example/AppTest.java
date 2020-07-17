@@ -43,9 +43,9 @@ public class AppTest
         machine.addCurrency(100, "kr");
 
         //act
-        machine.request(1).toString();
-        machine.request(2).toString();
-        machine.request(3).toString();
+        machine.request(1);
+        machine.request(2);
+        machine.request(3);
 
         //Assert
         assertEquals(20, machine.getBalance());
